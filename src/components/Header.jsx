@@ -90,12 +90,14 @@ function NoUserHeader(){
 export default function Header({ initialUser }) {
   const [user, setUser] = useState(initialUser);
 
-  onAuthStateChanged(async user => {
-    if(!user) return await deleteCookie("__session");
-    const idToken = await user.getIdToken();
-    await setCookie("___session", idToken);
-    setUser(user);
-  });
+  useEffect(() => {
+    return onAuthStateChanged(async user => {
+      if(!user) return await deleteCookie("__session");
+      const idToken = await user.getIdToken();
+      await setCookie("___session", idToken);
+      setUser(user);
+    });
+  }, []);
 
   // const user = useUserSession(initialUser);
 
