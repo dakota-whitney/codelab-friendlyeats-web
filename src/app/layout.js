@@ -13,11 +13,11 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const { currentUser } = await getAuthenticatedAppForUser();
+  
   return (
     <html lang="en">
       <body>
         <Header initialUser={currentUser?.toJSON()} />
-
         <main>{children}</main>
       </body>
     </html>
