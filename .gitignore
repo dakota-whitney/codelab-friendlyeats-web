@@ -7,8 +7,8 @@ node_modules
 #Next files
 .next/
 
-#Firebse files
-.firebase/
+#Firebse logs
+.firebase/logs
 
 #Debug logs
 firebase-debug.log

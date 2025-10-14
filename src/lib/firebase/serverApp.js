@@ -4,6 +4,7 @@ import "server-only";
 import { cookies } from "next/headers";
 import { initializeServerApp, initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import firebaseConfig from "./config";
 
 // Returns an authenticated client SDK instance for use in Server Side Rendering
 // and Static Site Generation
@@ -14,7 +15,7 @@ export async function getAuthenticatedAppForUser() {
   // instantiate the SDK with credentials retrieved from the client & has
   // other affordances for use in server environments.
   // https://github.com/firebase/firebase-js-sdk/issues/8863#issuecomment-2751401913
-  const firebaseServerApp = initializeServerApp(initializeApp(), {authIdToken,});
+  const firebaseServerApp = initializeServerApp(initializeApp(firebaseConfig), {authIdToken,});
 
   const auth = getAuth(firebaseServerApp);
   await auth.authStateReady();
