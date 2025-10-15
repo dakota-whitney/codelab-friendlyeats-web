@@ -8,7 +8,7 @@ node_modules
 .next/
 
 #App config
-src/lib/config.js
+src/lib/firebase/config.js
 
 #Emulator Config
 apphosting.emulator.yaml
