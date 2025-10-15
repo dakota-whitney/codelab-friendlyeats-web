@@ -1,5 +1,5 @@
 export const firebaseConfig = {
-    apiKey: process.env.NEXT_PUBLIC_API_KEY,
+    apiKey: process.env.NEXT_PUBLIC_TEST_API_KEY,
     authDomain: "friendlyeats-codelab-46f69.firebaseapp.com",
     projectId: "friendlyeats-codelab-46f69",
     storageBucket: "friendlyeats-codelab-46f69.firebasestorage.app",
