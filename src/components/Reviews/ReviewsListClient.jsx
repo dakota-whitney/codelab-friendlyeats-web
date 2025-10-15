@@ -1,14 +1,9 @@
 "use client";
-
 import React, { useState, useEffect } from "react";
 import { getReviewsSnapshotByRestaurantId } from "@/src/lib/firebase/firestore.js";
 import { Review } from "@/src/components/Reviews/Review";
 
-export default function ReviewsListClient({
-  initialReviews,
-  restaurantId,
-  userId,
-}) {
+export default function ReviewsListClient({ initialReviews, restaurantId, userId }){
   const [reviews, setReviews] = useState(initialReviews);
 
   useEffect(() => {
@@ -16,6 +11,7 @@ export default function ReviewsListClient({
       setReviews(data);
     });
   }, [restaurantId]);
+
   return (
     <article>
       <ul className="reviews">
@@ -39,4 +35,4 @@ export default function ReviewsListClient({
       </ul>
     </article>
   );
-}
+};

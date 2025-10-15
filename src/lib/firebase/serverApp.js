@@ -4,7 +4,7 @@ import "server-only";
 import { cookies } from "next/headers";
 import { initializeServerApp, initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import firebaseConfig from "./config";
+import { firebaseConfig } from "./config";
 
 // Returns an authenticated client SDK instance for use in Server Side Rendering
 // and Static Site Generation
@@ -20,5 +20,9 @@ export async function getAuthenticatedAppForUser() {
   const auth = getAuth(firebaseServerApp);
   await auth.authStateReady();
 
-  return { firebaseServerApp, currentUser: auth.currentUser };
+  return {
+    serverApp: firebaseServerApp,
+    currentUser: auth.currentUser,
+    config: firebaseConfig
+  };
 };

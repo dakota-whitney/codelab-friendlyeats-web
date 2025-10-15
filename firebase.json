@@ -17,7 +17,9 @@
     },
     "singleProjectMode": true,
     "apphosting": {
-      "port": 5001
+      "port": 5001,
+      "rootDirectory": "./",
+      "startCommand": "npm run dev"
     }
   },
   "firestore": {

@@ -1,7 +1,6 @@
-"use client";
-
 // This components shows one individual restaurant
 // It receives data from src/app/restaurant/[id]/page.jsx
+"use client";
 
 import { React, useState, useEffect, Suspense } from "react";
 import dynamic from "next/dynamic";
@@ -34,9 +33,7 @@ export default function Restaurant({
 
   async function handleRestaurantImage(target) {
     const image = target.files ? target.files[0] : null;
-    if (!image) {
-      return;
-    }
+    if (!image) return;
 
     const imageURL = await updateRestaurantImage(id, image);
     setRestaurantDetails({ ...restaurantDetails, photo: imageURL });

@@ -1,6 +1,5 @@
-"use client";
-
 // This components handles the review dialog and uses a next.js feature known as Server Actions to handle the form submission
+"use client";
 
 import { useEffect, useLayoutEffect, useRef } from "react";
 import RatingPicker from "@/src/components/RatingPicker.jsx";

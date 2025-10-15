@@ -1,6 +1,5 @@
 "use client";
-
-import firebaseConfig from "./config";
+import { firebaseConfig } from "./config";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
@@ -8,8 +7,6 @@ import { getStorage } from "firebase/storage";
 
 // Use automatic initialization
 // https://firebase.google.com/docs/app-hosting/firebase-sdks#initialize-with-no-arguments
-// export const firebaseApp = initializeApp();
-
 export const firebaseApp = initializeApp(firebaseConfig);
 export const auth = getAuth(firebaseApp);
 export const db = getFirestore(firebaseApp);

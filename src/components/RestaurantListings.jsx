@@ -1,7 +1,6 @@
-"use client";
-
 // This components handles the restaurant listings page
 // It receives data from src/app/page.jsx, such as the initial restaurants and search params from the URL
+"use client";
 
 import Link from "next/link";
 import { React, useState, useEffect } from "react";

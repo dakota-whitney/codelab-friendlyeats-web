@@ -1,19 +1,31 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { auth } from "@/src/lib/firebase/clientApp";
 import {
-  signInWithGoogle,
-  signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
   onAuthStateChanged,
-} from "@/src/lib/firebase/auth.js";
+  // onIdTokenChanged,
+} from "firebase/auth";
+// import {
+//   signInWithGoogle,
+//   signOut,
+//   onAuthStateChanged,
+// } from "@/src/lib/firebase/auth.js";
 import { addFakeRestaurantsAndReviews } from "@/src/lib/firebase/firestore.js";
 import { setCookie, deleteCookie } from "cookies-next";
 
-function UserHeader({ user }) {
+function UserHeader({ user, auth }) {
 
-  const handleSignOut = (event) => {
+  const handleSignOut = async event => {
     event.preventDefault();
-    signOut();
+
+    try {
+      await auth.signOut();
+    } catch(error){
+      console.error('Error signing out with Google', error);
+    };
   };
 
   return (
@@ -49,11 +61,17 @@ function UserHeader({ user }) {
   );
 };
 
-function NoUserHeader(){
+function NoUserHeader({ auth }){
 
-  const handleSignIn = (event) => {
+  const handleSignIn = async event => {
     event.preventDefault();
-    signInWithGoogle();
+    const provider = new GoogleAuthProvider();
+
+    try {
+      await signInWithPopup(auth, provider);
+    } catch(error) {
+      console.error('Error signing in with Google', error);
+    };
   };
   
   return (
@@ -66,13 +84,13 @@ function NoUserHeader(){
   );
 };
 
-export default function Header({ initialUser }) {
+export default function Header({ appConfig, initialUser }) {
   const [user, setUser] = useState(initialUser);
 
   useEffect(() => {
-    return onAuthStateChanged(async user => {
+    return onAuthStateChanged(auth, async user => {
       if(!user) await deleteCookie("__session");
-      else await user.getIdToken().then(token => setCookie("___session", token))
+      else await user.getIdToken().then(token => setCookie("___session", token));
       setUser(user);
     });
   }, []);
@@ -83,7 +101,10 @@ export default function Header({ initialUser }) {
         <img src="/friendly-eats.svg" alt="FriendlyEats" />
         Friendly Eats
       </Link>
-      {user ? <UserHeader user={user} /> : <NoUserHeader />}
+      {user ? 
+        <UserHeader user={user} auth={auth} /> : 
+        <NoUserHeader auth={auth} />
+      }
     </header>
   );
 };

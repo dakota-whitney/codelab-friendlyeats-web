@@ -7,6 +7,9 @@ node_modules
 #Next files
 .next/
 
+#Emulator Config
+apphosting.emulator.yaml
+
 #Firebse logs
 .firebase/logs
 
