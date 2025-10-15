@@ -7,6 +7,9 @@ node_modules
 #Next files
 .next/
 
+#App config
+src/lib/config.js
+
 #Emulator Config
 apphosting.emulator.yaml
 
